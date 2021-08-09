@@ -1,13 +1,13 @@
 import { createApp } from 'vue';
 import App from './App.vue';
 import { createPinia } from 'pinia';
-import PiniaPluginUndo from 'pinia-undo'
+import { PiniaUndo } from 'pinia-undo'
 
 const app = createApp(App);
 const pinia = createPinia();
 
-// @ts-ignore
-pinia.use(PiniaPluginUndo)
+
+pinia.use(PiniaUndo)
 
 app.use(pinia);
 
