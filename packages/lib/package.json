@@ -1,6 +1,6 @@
 {
   "name": "pinia-undo",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "license": "MIT",
   "main": "./dist/pinia-undo.umd.js",
   "module": "./dist/pinia-undo.es.js",
