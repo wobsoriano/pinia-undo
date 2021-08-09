@@ -1,43 +1,71 @@
-# pinia-shared-state
+# pinia-undo
 
-A lightweight module to sync your pinia state across browser tabs using the [BroadcastChannel API](https://developer.mozilla.org/en-US/docs/Web/API/Broadcast_Channel_API). Supports Vue 2 and 3.
+Enable time-travel in your apps. Undo/Redo plugin for pinia.
 
 ## Install
 
 ```sh
-yarn add pinia@next pinia-shared-state
+yarn add pinia@next pinia-undo
 ```
 
 ## Usage
 
-```ts
-import { defineStore } from 'pinia'
-import { share, isSupported } from 'pinia-shared-state'
+Since it's a plugin, use it like:
 
+```js
+const pinia = createPinia()
+pinia.use(PiniaUndo)
+```
+
+This adds `undo` and `redo` properties to your stores.
+
+```js
 const useCounterStore = defineStore({
   id: 'counter',
-  state: () => ({ count: 0 })
-})
+  state: () => ({
+    count: 10,
+  }),
+  actions: {
+    increment() {
+        this.count++
+    }
+  }
+});
 
 const counterStore = useCounterStore()
 
-if (isSupported()) {
-    // share the property "count" of the state with other tabs.
-    share('count', counterStore)
-}
+// undo/redo have no effect if we're at the
+// beginning/end of the stack
+counterStore.undo() // { count: 10 }
+counterStore.redo() // { count: 10 }
+
+counterStore.increment() // { count: 11 }
+counterStore.increment() // { count: 12 }
+
+counterStore.undo() // { count: 11 }
+counterStore.undo() // { count: 10 }
+counterStore.undo() // { count: 10 }
+
+counterStore.redo() // { count: 11 }
 ```
 
-## API
+## Options
 
-```ts
-share('count', counterStore, {
-    // If set to true this tab tries to immediately recover the shared state from another tab. Defaults to true.
-    initialize: true,
-    /*
-        Each shared property is shared over a specific channel with a name that has to be unique.
-        By default the name of the property is used. So if you want to share properties from different stores with the same name set this to something unique.
-    */
-    ref: "shared-store",
+Name | Type | Default | Description |
+------ | ------ | ------ | ------ |
+`omit` | `array` | `[]` | An array of fields that the plugin will ignore. |
+`disable` | `boolean` | `false` | Disable history tracking of store. |
+
+```js
+const useCounterStore = defineStore({
+  id: 'counter',
+  state: () => ({
+    count: 10,
+    name: 'John Doe'
+  }),
+  undo: {
+    omit: ['name']
+  }
 });
 ```
 
