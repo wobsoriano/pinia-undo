@@ -5,6 +5,7 @@ export const useCounterStore = defineStore({
 
   state: () => ({
     count: 0,
+    name: 'john'
   }),
 
   getters: {
@@ -19,5 +20,6 @@ export const useCounterStore = defineStore({
         if (!this.count) return;
         this.count--;
     }
-  }
+  },
+
 });
