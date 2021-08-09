@@ -21,22 +21,11 @@
     "@types/node": "^16.4.10",
     "typescript": "^4.3.2",
     "vite": "^2.4.4",
-    "vite-plugin-dts": "^0.5.3",
-    "vue": "^3.0.11"
+    "vite-plugin-dts": "^0.5.3"
   },
   "dependencies": {
     "pinia": "next",
-    "undo-stacker": "^0.0.6",
-    "vue-demi": "^0.11.2"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "^1.0.0-rc.1",
-    "vue": "^2.0.0 || >=3.0.0"
-  },
-  "peerDependenciesMeta": {
-    "@vue/composition-api": {
-      "optional": true
-    }
+    "undo-stacker": "^0.0.6"
   },
   "files": [
     "dist"
