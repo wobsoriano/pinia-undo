@@ -4,6 +4,8 @@
       <div class="button__wrapper">
         <button @click="counterStore.decrement">-</button>
         <button @click="counterStore.increment">+</button>
+        <button @click="counterStore.undo">Undo</button>
+        <button @click="counterStore.redo">Redo</button>
       </div>
     </div>
   </template>
