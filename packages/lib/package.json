@@ -1,6 +1,6 @@
 {
   "name": "pinia-undo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "main": "./dist/pinia-undo.umd.js",
   "module": "./dist/pinia-undo.es.js",
@@ -24,10 +24,10 @@
     "typescript": "^4.3.2",
     "vite": "^2.4.4",
     "vite-plugin-dts": "^0.5.3",
-    "vue": "^3.0.11"
+    "vue": "^3.2.0"
   },
   "dependencies": {
-    "pinia": "next",
+    "pinia": "beta",
     "undo-stacker": "^0.0.6"
   },
   "files": [

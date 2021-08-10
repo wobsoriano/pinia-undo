@@ -8,6 +8,7 @@
       "lib:watch": "yarn workspace pinia-undo run build:watch",
       "lib": "yarn workspace pinia-undo",
       "demo": "yarn workspace demo",
+      "test": "yarn lib test",
       "copy:md": "cp README.md packages/lib/README.md && cp LICENSE.md packages/lib/LICENSE.md"
     }
 }

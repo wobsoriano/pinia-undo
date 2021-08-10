@@ -1,8 +1,6 @@
 import type { PiniaPluginContext } from 'pinia';
 import createStack from 'undo-stacker';
 
-const registeredStoreIds: Record<string, boolean> = {};
-
 type Store = PiniaPluginContext['store'];
 type Options = PiniaPluginContext['options'];
 
@@ -24,26 +22,24 @@ function removeOmittedKeys(options: Options, store: Store): Store['$state'] {
 }
 
 export function PiniaUndo({ store, options }: PiniaPluginContext) {
-  if (!registeredStoreIds[store.$id]) {
-    if (options.undo && options.undo.disable) return;
-    const stack = createStack(removeOmittedKeys(options, store));
-    store.undo = () => {
-      store.$state = {
-        ...store.$state,
-        ...stack.undo()
-      }
-    };
-    store.redo = () => {
-      store.$state = {
-        ...store.$state,
-        ...stack.redo()
-      }
-    };
-    store.$subscribe(() => {
-      stack.push(removeOmittedKeys(options, store));
-    });
-    registeredStoreIds[store.$id] = true;
+  if (options.undo && options.undo.disable) return;
+  const stack = createStack(removeOmittedKeys(options, store));
+  let preventUpdateOnSubscribe = false;
+  store.undo = () => {
+    preventUpdateOnSubscribe = true;
+    store.$patch(stack.undo());
   }
+  store.redo = () => {
+    preventUpdateOnSubscribe = true;
+    store.$patch(stack.redo());
+  }
+  store.$subscribe(() => {
+    if (preventUpdateOnSubscribe) {
+      preventUpdateOnSubscribe = false;
+      return;
+    }
+    stack.push(removeOmittedKeys(options, store));
+  })
 }
 
 declare module 'pinia' {
@@ -52,7 +48,7 @@ declare module 'pinia' {
     redo: () => void;
   }
 
-  export interface DefineStoreOptions<Id extends string, S extends StateTree, G extends GettersTree<S>, A> {
+  export interface DefineStoreOptionsBase<S, Store> {
     undo?: {
       disable?: boolean;
       omit?: string[];

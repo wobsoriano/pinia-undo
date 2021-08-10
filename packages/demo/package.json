@@ -7,12 +7,12 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "pinia": "next",
-    "vue": "^3.0.11"
+    "pinia": "beta",
+    "vue": "^3.2.0"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.4.0",
-    "@vue/compiler-sfc": "^3.0.11",
+    "@vitejs/plugin-vue": "latest",
+    "@vue/compiler-sfc": "^3.2.0",
     "typescript": "^4.3.2",
     "vite": "^2.4.4",
     "vue-tsc": "^0.2.2"
