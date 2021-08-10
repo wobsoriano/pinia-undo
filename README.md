@@ -2,10 +2,12 @@
 
 Enable time-travel in your apps. Undo/Redo plugin for pinia.
 
+Requires Vue ^2.6.14 || ^3.2.0
+
 ## Install
 
 ```sh
-yarn add pinia@next pinia-undo
+yarn add pinia@beta pinia-undo
 ```
 
 ## Usage
@@ -68,11 +70,6 @@ const useCounterStore = defineStore({
   }
 });
 ```
-
-## Credits
-
-- [pinia](https://pinia.esm.dev/) - 🍍 Intuitive, type safe, light and flexible Store for Vue using the composition api with DevTools support.
-- [vue-demi](https://github.com/vueuse/vue-demi/) - Creates Universal Library for Vue 2 & 3.
 
 ## License
 
