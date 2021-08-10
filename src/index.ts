@@ -73,7 +73,7 @@ declare module 'pinia' {
      *   undo: {
      *     // An array of fields that the plugin will ignore.
      *     omit: ['name'],
-     *     Disable history tracking of this store.
+     *     // Disable history tracking of this store.
      *     disable: true
      *   }
      * })
