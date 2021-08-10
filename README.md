@@ -15,6 +15,8 @@ yarn add pinia@beta pinia-undo
 Since it's a plugin, use it like:
 
 ```js
+import { PiniaUndo } from 'pinia-undo'
+
 const pinia = createPinia()
 pinia.use(PiniaUndo)
 ```
