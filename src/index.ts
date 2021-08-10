@@ -64,9 +64,9 @@ declare module 'pinia' {
      * ```ts
      * const counterStore = useCounterStore()
      *
-     * counter.increment();
-     * counter.undo();
-     * counter.redo();
+     * counterStore.increment();
+     * counterStore.undo();
+     * counterStore.redo();
      * ```
      */
     undo: () => void;
