@@ -28,8 +28,6 @@ describe('PiniaUndo', () => {
         const pinia = createPinia().use(PiniaUndo);
         app.use(pinia);
         setActivePinia(pinia);
-        // 🍍 debuggerEvents should be an array. This is most likely an internal Pinia bug.
-        jest.spyOn(console, 'error').mockImplementation(() => {});
         // [Vue warn]: App already provides property with key "Symbol(pinia)". It will be overwritten with the new value.
         jest.spyOn(console, 'warn').mockImplementation(() => {});
     });

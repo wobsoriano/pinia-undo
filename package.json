@@ -1,14 +1,41 @@
 {
-    "name": "monorepo",
-    "private": true,
-    "workspaces": [
-      "packages/*"
-    ],
-    "scripts": {
-      "lib:watch": "yarn workspace pinia-undo run build:watch",
-      "lib": "yarn workspace pinia-undo",
-      "demo": "yarn workspace demo",
-      "test": "yarn lib test",
-      "copy:md": "cp README.md packages/lib/README.md && cp LICENSE.md packages/lib/LICENSE.md"
+  "name": "pinia-undo",
+  "version": "0.0.3",
+  "license": "MIT",
+  "main": "./dist/pinia-undo.umd.js",
+  "module": "./dist/pinia-undo.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/pinia-undo.es.js",
+      "require": "./dist/pinia-undo.umd.js"
     }
+  },
+  "scripts": {
+    "build": "tsc && vite build",
+    "build:watch": "yarn build --watch",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.4.10",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.4",
+    "typescript": "^4.3.2",
+    "vite": "^2.4.4",
+    "vite-plugin-dts": "^0.5.3",
+    "vue": "^3.2.0"
+  },
+  "dependencies": {
+    "pinia": "beta",
+    "undo-stacker": "^0.0.6"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wobsoriano/pinia-undo.git"
+  },
+  "sideEffects": false
 }

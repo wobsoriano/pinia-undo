@@ -21,6 +21,18 @@ function removeOmittedKeys(options: Options, store: Store): Store['$state'] {
   return clone;
 }
 
+/**
+ * Adds Undo/Redo properties to your store.
+ *
+ * @example
+ *
+ * ```ts
+ * import { PiniaUndo } from 'pinia-undo'
+ *
+ * // Pass the plugin to your application's pinia plugin
+ * pinia.use(PiniaUndo)
+ * ```
+ */
 export function PiniaUndo({ store, options }: PiniaPluginContext) {
   if (options.undo && options.undo.disable) return;
   const stack = createStack(removeOmittedKeys(options, store));
@@ -49,6 +61,24 @@ declare module 'pinia' {
   }
 
   export interface DefineStoreOptionsBase<S, Store> {
+    /**
+     * Disable or ignore specific fields.
+     *
+     * @example
+     *
+     * ```js
+     * defineStore({
+     *   id: 'counter',
+     *   state: () => ({ count: 0, foo: 'bar' })
+     *   undo: {
+     *     // An array of fields that the plugin will ignore.
+     *     omit: ['name'],
+     *     Disable history tracking of this store.
+     *     disable: true
+     *   }
+     * })
+     * ```
+     */
     undo?: {
       disable?: boolean;
       omit?: string[];
