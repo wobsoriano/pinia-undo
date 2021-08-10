@@ -56,6 +56,19 @@ export function PiniaUndo({ store, options }: PiniaPluginContext) {
 
 declare module 'pinia' {
   export interface PiniaCustomProperties {
+    /**
+     * Undo/Redo a state.
+     *
+     * @example
+     *
+     * ```ts
+     * const counterStore = useCounterStore()
+     *
+     * counter.increment();
+     * counter.undo();
+     * counter.redo();
+     * ```
+     */
     undo: () => void;
     redo: () => void;
   }
