@@ -94,7 +94,7 @@ declare module 'pinia' {
      */
     undo?: {
       disable?: boolean;
-      omit?: string[];
+      omit?: Array<keyof S>;
     }
   }
 }
