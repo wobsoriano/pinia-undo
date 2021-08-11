@@ -2,7 +2,7 @@ import { setActivePinia, createPinia, defineStore } from 'pinia';
 import { createApp } from 'vue';
 import { PiniaUndo } from '../src';
 
-const factory = (id: string, options?: { omit?: string[], disable?: boolean }) => {
+const factory = (id: string, options?: { omit?: any[], disable?: boolean }) => {
     return defineStore({
         id,
         state: () => ({
