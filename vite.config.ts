@@ -9,14 +9,6 @@ module.exports = defineConfig({
       entry: resolve(__dirname, 'src/index.ts'),
       name: 'PiniaUndo',
       fileName: format => `${pkg.name}.${format}.js`  
-    },
-    rollupOptions: {
-      external: ['vue'],
-      output: {
-        globals: {
-          vue: 'Vue'
-        }
-      }
     }
   },
   plugins: [
