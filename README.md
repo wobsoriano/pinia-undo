@@ -7,7 +7,7 @@ Requires Vue ^2.6.14 || ^3.2.0
 ## Install
 
 ```sh
-pnpm add pinia@beta pinia-undo
+pnpm add pinia pinia-undo
 ```
 
 ## Usage
