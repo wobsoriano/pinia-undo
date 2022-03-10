@@ -2,33 +2,33 @@
   "name": "pinia-undo",
   "version": "0.0.5",
   "license": "MIT",
-  "main": "./dist/pinia-undo.umd.js",
-  "module": "./dist/pinia-undo.es.js",
-  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
-    ".": {
-      "import": "./dist/pinia-undo.es.js",
-      "require": "./dist/pinia-undo.umd.js"
-    }
+    "require": "./dist/index.js",
+    "import": "./dist/index.mjs"
   },
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc && vite build",
-    "build:watch": "yarn build --watch",
-    "test": "jest"
+    "build-fast": "tsup src/index.ts --format cjs,esm",
+    "build": "pnpm run build-fast -- --dts-resolve",
+    "test": "vitest run",
+    "release": "bumpp --commit --push --tag && pnpm publish",
+    "prepublishOnly": "pnpm run test && pnpm run build",
+    "lint": "eslint \"**/*.{ts,js}\""
   },
   "devDependencies": {
-    "@types/jest": "^26.0.24",
-    "@types/node": "^16.4.10",
-    "jest": "^27.0.6",
-    "ts-jest": "^27.0.4",
+    "@antfu/eslint-config": "^0.18.3",
+    "bumpp": "^7.1.1",
+    "eslint": "^8.10.0",
+    "tsup": "^5.11.13",
     "typescript": "^4.3.2",
-    "vite": "^2.4.4",
-    "vite-plugin-dts": "^0.5.3",
-    "vue": "^3.2.0"
+    "vitest": "^0.5.9"
   },
   "dependencies": {
-    "pinia": "beta",
-    "undo-stacker": "^0.0.6"
+    "pinia": "^2.0.11",
+    "undo-stacker": "^0.0.9",
+    "vue": "^3.2.31"
   },
   "files": [
     "dist"
@@ -37,5 +37,11 @@
     "type": "git",
     "url": "https://github.com/wobsoriano/pinia-undo.git"
   },
-  "sideEffects": false
+  "eslintConfig": {
+    "extends": "@antfu"
+  },
+  "eslintIgnore": [
+    "dist",
+    "node_modules"
+  ]
 }

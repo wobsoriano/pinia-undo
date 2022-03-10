@@ -1,8 +1,9 @@
-import type { PiniaPluginContext } from 'pinia';
-import createStack from 'undo-stacker';
+import type { PiniaPluginContext } from 'pinia'
+import createStack from 'undo-stacker'
+import { markRaw } from 'vue'
 
-type Store = PiniaPluginContext['store'];
-type Options = PiniaPluginContext['options'];
+type Store = PiniaPluginContext['store']
+type Options = PiniaPluginContext['options']
 
 /**
  * Removes properties from the store state.
@@ -11,14 +12,14 @@ type Options = PiniaPluginContext['options'];
  * @returns {Object} State of the store without omitted keys.
  */
 function removeOmittedKeys(options: Options, store: Store): Store['$state'] {
-  const clone = JSON.parse(JSON.stringify(store.$state));
+  const clone = JSON.parse(JSON.stringify(store.$state))
   if (options.undo && options.undo.omit) {
     options.undo.omit.forEach((key) => {
-      delete clone[key];
-    });
-    return clone;
+      delete clone[key]
+    })
+    return clone
   }
-  return clone;
+  return clone
 }
 
 /**
@@ -34,23 +35,25 @@ function removeOmittedKeys(options: Options, store: Store): Store['$state'] {
  * ```
  */
 export function PiniaUndo({ store, options }: PiniaPluginContext) {
-  if (options.undo && options.undo.disable) return;
-  const stack = createStack(removeOmittedKeys(options, store));
-  let preventUpdateOnSubscribe = false;
-  store.undo = () => {
-    preventUpdateOnSubscribe = true;
-    store.$patch(stack.undo());
-  }
-  store.redo = () => {
-    preventUpdateOnSubscribe = true;
-    store.$patch(stack.redo());
-  }
+  if (options.undo && options.undo.disable) return
+  const stack = createStack(removeOmittedKeys(options, store))
+  let preventUpdateOnSubscribe = false
+  store.undo = markRaw(() => {
+    preventUpdateOnSubscribe = true
+    store.$patch(stack.undo())
+  })
+  store.redo = markRaw(() => {
+    preventUpdateOnSubscribe = true
+    store.$patch(stack.redo())
+  })
   store.$subscribe(() => {
     if (preventUpdateOnSubscribe) {
-      preventUpdateOnSubscribe = false;
-      return;
+      preventUpdateOnSubscribe = false
+      return
     }
-    stack.push(removeOmittedKeys(options, store));
+    stack.push(removeOmittedKeys(options, store))
+  }, {
+    flush: 'sync',
   })
 }
 
@@ -69,10 +72,11 @@ declare module 'pinia' {
      * counterStore.redo();
      * ```
      */
-    undo: () => void;
-    redo: () => void;
+    undo: () => void
+    redo: () => void
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   export interface DefineStoreOptionsBase<S, Store> {
     /**
      * Disable or ignore specific fields.
@@ -93,8 +97,8 @@ declare module 'pinia' {
      * ```
      */
     undo?: {
-      disable?: boolean;
-      omit?: Array<keyof S>;
+      disable?: boolean
+      omit?: Array<keyof S>
     }
   }
 }

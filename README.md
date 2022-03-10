@@ -7,7 +7,7 @@ Requires Vue ^2.6.14 || ^3.2.0
 ## Install
 
 ```sh
-yarn add pinia@beta pinia-undo
+pnpm add pinia@beta pinia-undo
 ```
 
 ## Usage
@@ -31,10 +31,10 @@ const useCounterStore = defineStore({
   }),
   actions: {
     increment() {
-        this.count++
-    }
-  }
-});
+      this.count++
+    },
+  },
+})
 
 const counterStore = useCounterStore()
 
@@ -65,12 +65,12 @@ const useCounterStore = defineStore({
   id: 'counter',
   state: () => ({
     count: 10,
-    name: 'John Doe'
+    name: 'John Doe',
   }),
   undo: {
-    omit: ['name']
-  }
-});
+    omit: ['name'],
+  },
+})
 ```
 
 ## License

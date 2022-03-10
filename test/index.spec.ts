@@ -1,120 +1,121 @@
-import { setActivePinia, createPinia, defineStore } from 'pinia';
-import { createApp } from 'vue';
-import { PiniaUndo } from '../src';
+import { createPinia, defineStore, setActivePinia } from 'pinia'
+import { createApp } from 'vue'
+import { beforeEach, describe, expect, it, spyOn } from 'vitest'
+import { PiniaUndo } from '../src'
 
-const factory = (id: string, options?: { omit?: any[], disable?: boolean }) => {
-    return defineStore({
-        id,
-        state: () => ({
-          count: 1,
-        }),
-        actions: {
-            increment(n?: number) {
-                if (n) {
-                    this.count += n;
-                } else {
-                    this.count++;
-                }
-            }
-        },
-        undo: options
-    });
+const factory = (id: string, options?: { omit?: any[]; disable?: boolean }) => {
+  return defineStore({
+    id,
+    state: () => ({
+      count: 1,
+    }),
+    actions: {
+      increment(n?: number) {
+        if (n)
+          this.count += n
+
+        else
+          this.count++
+      },
+    },
+    undo: options,
+  })
 }
 
 describe('PiniaUndo', () => {
-    const app = createApp({})
+  const app = createApp({})
 
-    beforeEach(() => {
-        const pinia = createPinia().use(PiniaUndo);
-        app.use(pinia);
-        setActivePinia(pinia);
-        // [Vue warn]: App already provides property with key "Symbol(pinia)". It will be overwritten with the new value.
-        jest.spyOn(console, 'warn').mockImplementation(() => {});
-    });
+  beforeEach(() => {
+    const pinia = createPinia().use(PiniaUndo)
+    app.use(pinia)
+    setActivePinia(pinia)
+    // [Vue warn]: App already provides property with key "Symbol(pinia)". It will be overwritten with the new value.
+    spyOn(console, 'warn').mockImplementation(() => {})
+  })
 
-    it('returns the first/last value if stack is in initial state', () => {
-        const useCounterStore = factory('counter');
+  it('returns the first/last value if stack is in initial state', () => {
+    const useCounterStore = factory('counter')
 
-        const counter = useCounterStore();
+    const counter = useCounterStore()
 
-        counter.undo();
-        expect(counter.count).toBe(1);
-        counter.redo();
-        expect(counter.count).toBe(1);
-    });
+    counter.undo()
+    expect(counter.count).toBe(1)
+    counter.redo()
+    expect(counter.count).toBe(1)
+  })
 
-    it('goes back and forward through history state', () => {
-        const useCounterStore = factory('counter2');
+  it('goes back and forward through history state', () => {
+    const useCounterStore = factory('counter2')
 
-        const counter = useCounterStore();
-        
-        counter.increment();
-        counter.increment();
-        counter.increment();
+    const counter = useCounterStore()
 
-        counter.undo();
-        expect(counter.count).toEqual(3);
-        counter.undo();
-        expect(counter.count).toEqual(2);
-        counter.undo();
-        expect(counter.count).toEqual(1);
-        counter.redo();
-        expect(counter.count).toEqual(2);
-        counter.redo();
-        expect(counter.count).toEqual(3);
-        counter.redo();
-        expect(counter.count).toEqual(4);
-    });
+    counter.increment()
+    counter.increment()
+    counter.increment()
 
-    it('clears later values', () => {
-        const useCounterStore = factory('counter3');
+    counter.undo()
 
-        const counter = useCounterStore();
+    expect(counter.count).toEqual(3)
+    counter.undo()
+    expect(counter.count).toEqual(2)
+    counter.undo()
+    expect(counter.count).toEqual(1)
+    counter.redo()
+    expect(counter.count).toEqual(2)
+    counter.redo()
+    expect(counter.count).toEqual(3)
+    counter.redo()
+    expect(counter.count).toEqual(4)
+  })
 
-        counter.increment();
-        counter.increment();
+  it('clears later values', () => {
+    const useCounterStore = factory('counter3')
 
-        counter.undo();
-        expect(counter.count).toBe(2);
-        counter.increment(2);
+    const counter = useCounterStore()
 
-        counter.undo();
-        expect(counter.count).toBe(2);
-        counter.undo();
-        expect(counter.count).toBe(1);
+    counter.increment()
+    counter.increment()
 
+    counter.undo()
+    expect(counter.count).toBe(2)
+    counter.increment(2)
 
-        counter.redo();
-        expect(counter.count).toBe(2);
-        counter.redo();
-        expect(counter.count).toBe(4);
-    });
+    counter.undo()
+    expect(counter.count).toBe(2)
+    counter.undo()
+    expect(counter.count).toBe(1)
 
-    it('does not track history of property if omitted', () => {
-        const useCounterStore = factory('counter4', {
-            omit: ['count']
-        });
+    counter.redo()
+    expect(counter.count).toBe(2)
+    counter.redo()
+    expect(counter.count).toBe(4)
+  })
 
-        const counter = useCounterStore();
+  it('does not track history of property if omitted', () => {
+    const useCounterStore = factory('counter4', {
+      omit: ['count'],
+    })
 
-        counter.increment();
-        counter.undo();
-        expect(counter.count).toBe(2);
+    const counter = useCounterStore()
 
-        counter.increment();
-        counter.redo();
-        expect(counter.count).toBe(3);
-    });
+    counter.increment()
+    counter.undo()
+    expect(counter.count).toBe(2)
 
-    it('ignores store history if disabled', () => {
-        const useCounterStore = factory('counter5', {
-            disable: true
-        });
+    counter.increment()
+    counter.redo()
+    expect(counter.count).toBe(3)
+  })
 
-        const counter = useCounterStore();
+  it('ignores store history if disabled', () => {
+    const useCounterStore = factory('counter5', {
+      disable: true,
+    })
 
-        expect(() => {
-            counter.undo()
-        }).toThrow(TypeError);
-    });
-});
+    const counter = useCounterStore()
+
+    expect(() => {
+      counter.undo()
+    }).toThrow(TypeError)
+  })
+})
