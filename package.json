@@ -2,12 +2,19 @@
   "name": "pinia-undo",
   "version": "0.1.1",
   "license": "MIT",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wobsoriano/pinia-undo.git"
+  },
+  "files": [
+    "dist"
+  ],
   "exports": {
     "require": "./dist/index.js",
     "import": "./dist/index.mjs"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
     "build-fast": "tsup src/index.ts --format cjs,esm",
@@ -17,6 +24,14 @@
     "prepublishOnly": "pnpm run test && pnpm run build",
     "lint": "eslint \"**/*.{ts,js}\""
   },
+  "peerDependencies": {
+    "pinia": "^2.0.0"
+  },
+  "dependencies": {
+    "pinia": "^2.0.11",
+    "undo-stacker": "^0.0.9",
+    "vue": "^3.2.31"
+  },
   "devDependencies": {
     "@antfu/eslint-config": "^0.18.3",
     "bumpp": "^7.1.1",
@@ -24,21 +39,6 @@
     "tsup": "^5.11.13",
     "typescript": "^4.4.4",
     "vitest": "^0.5.9"
-  },
-  "dependencies": {
-    "pinia": "^2.0.11",
-    "undo-stacker": "^0.0.9",
-    "vue": "^3.2.31"
-  },
-  "peerDependencies": {
-    "pinia": "^2.0.0"
-  },
-  "files": [
-    "dist"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/wobsoriano/pinia-undo.git"
   },
   "eslintConfig": {
     "extends": "@antfu"

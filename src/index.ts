@@ -1,6 +1,5 @@
 import type { PiniaPluginContext } from 'pinia'
 import createStack from 'undo-stacker'
-import { markRaw } from 'vue'
 
 type Store = PiniaPluginContext['store']
 type Options = PiniaPluginContext['options']
@@ -38,14 +37,14 @@ export function PiniaUndo({ store, options }: PiniaPluginContext) {
   if (options.undo && options.undo.disable) return
   const stack = createStack(removeOmittedKeys(options, store))
   let preventUpdateOnSubscribe = false
-  store.undo = markRaw(() => {
+  store.undo = () => {
     preventUpdateOnSubscribe = true
     store.$patch(stack.undo())
-  })
-  store.redo = markRaw(() => {
+  }
+  store.redo = () => {
     preventUpdateOnSubscribe = true
     store.$patch(stack.redo())
-  })
+  }
   store.$subscribe(() => {
     if (preventUpdateOnSubscribe) {
       preventUpdateOnSubscribe = false
