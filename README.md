@@ -12,8 +12,6 @@ pnpm add pinia pinia-undo
 
 ## Usage
 
-Since it's a plugin, use it like:
-
 ```js
 import { PiniaUndo } from 'pinia-undo'
 
