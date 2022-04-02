@@ -1,6 +1,6 @@
 import type { PiniaPluginContext } from 'pinia'
 import createStack from 'undo-stacker'
-import { safeParse } from './utils'
+import safeStringify from '@sindresorhus/safe-stringify'
 
 type Store = PiniaPluginContext['store']
 type Options = PiniaPluginContext['options']
@@ -12,7 +12,7 @@ type Options = PiniaPluginContext['options']
  * @returns {Object} State of the store without omitted keys.
  */
 function removeOmittedKeys(options: Options, store: Store): Store['$state'] {
-  const clone = safeParse(store.$state)
+  const clone = JSON.parse(safeStringify(store.$state))
   if (options.undo && options.undo.omit) {
     options.undo.omit.forEach((key) => {
       delete clone[key]
