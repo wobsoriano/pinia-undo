@@ -28,7 +28,7 @@
     "pinia": "^2.0.0"
   },
   "dependencies": {
-    "pinia": "^2.0.11",
+    "pinia": "^2.0.23",
     "undo-stacker": "^0.1.0",
     "vue-demi": "^0.13.11"
   },
