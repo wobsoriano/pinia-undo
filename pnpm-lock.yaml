@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.19.4
   bumpp: ^7.2.0
+  devalue: ^4.0.0
   eslint: ^8.10.0
   pinia: ^2.0.23
   tsup: ^5.12.9
@@ -10,12 +11,11 @@ specifiers:
   undo-stacker: ^0.1.0
   vitest: ^0.8.2
   vue: ^3.2.41
-  vue-demi: ^0.13.11
 
 dependencies:
+  devalue: 4.0.0
   pinia: 2.0.23_2dwfbz7kcawns6o5asfgcyf7yu
   undo-stacker: 0.1.0
-  vue-demi: 0.13.11_vue@3.2.41
 
 devDependencies:
   '@antfu/eslint-config': 0.19.4_pzezdwkd5bvjkx2hshexc25sxq
@@ -825,6 +825,10 @@ packages:
     dependencies:
       object-keys: 1.1.1
     dev: true
+
+  /devalue/4.0.0:
+    resolution: {integrity: sha512-w25siwXyuMUqMr7jPlEjyNCp1vn0Jzj/fNg3qVt/r/Dpe8HjESh2V92L0jmh3uq4iJt0BvjH+Azk1pQzkcnDWA==}
+    dev: false
 
   /dir-glob/3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}

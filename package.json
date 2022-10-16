@@ -28,9 +28,9 @@
     "pinia": "^2.0.0"
   },
   "dependencies": {
+    "devalue": "^4.0.0",
     "pinia": "^2.0.23",
-    "undo-stacker": "^0.1.0",
-    "vue-demi": "^0.13.11"
+    "undo-stacker": "^0.1.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.19.4",
