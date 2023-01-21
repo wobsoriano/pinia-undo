@@ -73,4 +73,4 @@ const useCounterStore = defineStore({
 
 ## License
 
-[MIT License](http://opensource.org/licenses/MIT).
+MIT.
