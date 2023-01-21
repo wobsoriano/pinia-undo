@@ -1,6 +1,6 @@
 import { createPinia, defineStore, setActivePinia } from 'pinia'
 import { createApp } from 'vue'
-import { beforeEach, describe, expect, it, spyOn } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { PiniaUndo } from '../src'
 
 const factory = (id: string, options?: { omit?: any[]; disable?: boolean }) => {
@@ -29,8 +29,7 @@ describe('PiniaUndo', () => {
     const pinia = createPinia().use(PiniaUndo)
     app.use(pinia)
     setActivePinia(pinia)
-    // [Vue warn]: App already provides property with key "Symbol(pinia)". It will be overwritten with the new value.
-    spyOn(console, 'warn').mockImplementation(() => {})
+    vi.spyOn(console, 'warn').mockImplementation(() => {})
   })
 
   it('returns the first/last value if stack is in initial state', () => {

@@ -28,18 +28,18 @@
     "pinia": "^2.0.0"
   },
   "dependencies": {
-    "pinia": "^2.0.23",
     "realistic-structured-clone": "^3.0.0",
     "undo-stacker": "^0.1.3"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.19.4",
-    "bumpp": "^7.2.0",
-    "eslint": "^8.10.0",
-    "tsup": "^5.12.9",
-    "typescript": "^4.4.4",
-    "vitest": "^0.8.2",
-    "vue": "^3.2.41"
+    "@antfu/eslint-config": "^0.34.1",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.32.0",
+    "pinia": "^2.0.29",
+    "tsup": "^6.5.0",
+    "typescript": "^4.9.4",
+    "vitest": "^0.27.2",
+    "vue": "^3.2.45"
   },
   "eslintConfig": {
     "extends": "@antfu"
