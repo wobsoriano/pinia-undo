@@ -1,5 +1,5 @@
 import type { PiniaPluginContext } from 'pinia'
-import structuredClone from 'realistic-structured-clone'
+import structuredClone from '@ungap/structured-clone'
 import createStack from 'undo-stacker'
 import { toRaw } from 'vue'
 
