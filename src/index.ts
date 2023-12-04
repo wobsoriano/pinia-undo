@@ -53,7 +53,7 @@ type PluginOptions = PiniaPluginContext & {
 export function PiniaUndo({ store, options, serializer }: PluginOptions) {
   if (options.undo && options.undo.disable)
     return
-  const stack = createStack(removeOmittedKeys(options, store, serializer))
+  let stack = createStack(removeOmittedKeys(options, store, serializer))
   let preventUpdateOnSubscribe = false
   store.undo = () => {
     preventUpdateOnSubscribe = true
@@ -63,12 +63,15 @@ export function PiniaUndo({ store, options, serializer }: PluginOptions) {
     preventUpdateOnSubscribe = true
     store.$patch(stack.redo())
   }
+  store.resetStack = () => {
+    stack = createStack(removeOmittedKeys(options, store, serializer))
+  }
   store.$subscribe(() => {
     if (preventUpdateOnSubscribe) {
       preventUpdateOnSubscribe = false
       return
     }
-    stack.push(removeOmittedKeys(options, store))
+    stack.push(removeOmittedKeys(options, store, serializer))
   }, {
     flush: 'sync',
   })
@@ -87,10 +90,14 @@ declare module 'pinia' {
      * counterStore.increment();
      * counterStore.undo();
      * counterStore.redo();
+     *
+     * counterStore.$reset();
+     * counterStore.resetStack();
      * ```
      */
     undo: () => void
     redo: () => void
+    resetStack: () => void
   }
 
   // eslint-disable-next-line unused-imports/no-unused-vars
