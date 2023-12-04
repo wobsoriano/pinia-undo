@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { PiniaUndo } from '../src'
 
-function factory(id: string, options?: { omit?: any[]; disable?: boolean }) {
+function factory(id: string, options?: { omit?: any[], disable?: boolean }) {
   return defineStore({
     id,
     state: () => ({
@@ -22,7 +22,7 @@ function factory(id: string, options?: { omit?: any[]; disable?: boolean }) {
   })
 }
 
-describe('PiniaUndo', () => {
+describe('piniaUndo', () => {
   const app = createApp({})
 
   beforeEach(() => {

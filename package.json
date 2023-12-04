@@ -10,11 +10,11 @@
   "exports": {
     ".": {
       "types": {
-        "require": "./dist/index.d.cts",
-        "import": "./dist/index.d.ts"
+        "import": "./dist/index.d.ts",
+        "require": "./dist/index.d.cts"
       },
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "main": "./dist/index.cjs",
@@ -56,8 +56,5 @@
     "typescript": "^5.3.2",
     "vitest": "^1.0.1",
     "vue": "^3.3.10"
-  },
-  "eslintConfig": {
-    "extends": "@antfu"
   }
 }

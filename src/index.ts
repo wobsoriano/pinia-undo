@@ -10,7 +10,7 @@ type Options = PiniaPluginContext['options']
  * Removes properties from the store state.
  * @param options The options object defining the store passed to `defineStore()`.
  * @param store The store the plugin is augmenting.
- * @returns {Object} State of the store without omitted keys.
+ * @returns {object} State of the store without omitted keys.
  */
 function removeOmittedKeys(options: Options, store: Store): Store['$state'] {
   const clone = structuredClone(toRaw(store.$state))
@@ -78,7 +78,7 @@ declare module 'pinia' {
     redo: () => void
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // eslint-disable-next-line unused-imports/no-unused-vars
   export interface DefineStoreOptionsBase<S, Store> {
     /**
      * Disable or ignore specific fields.
