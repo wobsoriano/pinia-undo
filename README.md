@@ -57,6 +57,7 @@ Name | Type | Default | Description |
 ------ | ------ | ------ | ------ |
 `omit` | `array` | `[]` | An array of fields that the plugin will ignore. |
 `disable` | `boolean` | `false` | Disable history tracking of store. |
+`serializer` | `object` | `{ serializer: JSON.stringify, deserializer: JSON.parse }` | Custome serializer to serialize state before storing it in the undo stack. |
 
 ```js
 const useCounterStore = defineStore({

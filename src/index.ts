@@ -13,7 +13,7 @@ interface Serializer {
  * Removes properties from the store state.
  * @param options The options object defining the store passed to `defineStore()`.
  * @param store The store the plugin is augmenting.
- * @param serializer Customer serializer to serialize state before storing it in the undo stack.
+ * @param serializer Custome serializer to serialize state before storing it in the undo stack.
  * @returns {object} State of the store without omitted keys.
  */
 function removeOmittedKeys(
@@ -33,7 +33,7 @@ function removeOmittedKeys(
 
 type PluginOptions = PiniaPluginContext & {
   /**
-   * Customer serializer to serialize state before storing it in the undo stack.
+   * Custome serializer to serialize state before storing it in the undo stack.
    */
   serializer?: Serializer
 }
