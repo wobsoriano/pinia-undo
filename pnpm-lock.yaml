@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   undo-stacker:
-    specifier: ^0.2.0
-    version: 0.2.0
+    specifier: ^0.2.1
+    version: 0.2.1
 
 devDependencies:
   '@antfu/eslint-config':
@@ -3318,8 +3318,8 @@ packages:
     resolution: {integrity: sha512-o+ORpgGwaYQXgqGDwd+hkS4PuZ3QnmqMMxRuajK/a38L6fTpcE5GPIfrf+L/KemFzfUpeUQc1rRS1iDBozvnFA==}
     dev: true
 
-  /undo-stacker@0.2.0:
-    resolution: {integrity: sha512-gK/cESswyoMUV3Utox+cxdkO3uAXuS+CCmEchnoIo1dC+bvfQPZb8btAJlavbROA9hgZmPz7y4pZwu76Wsrcyg==}
+  /undo-stacker@0.2.1:
+    resolution: {integrity: sha512-wEFIuUlJtSB0Rt/LBxPqiZqKN2AMKqjdYIr2VTIPUPOEZxAOVE4zVY+z2b2yPBL1NvLW+Sm/kbCaqeWlINPZNA==}
     dev: false
 
   /unist-util-stringify-position@2.0.3:

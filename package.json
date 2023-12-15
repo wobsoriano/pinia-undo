@@ -44,7 +44,7 @@
     "pinia": "^2.0.0"
   },
   "dependencies": {
-    "undo-stacker": "^0.2.0"
+    "undo-stacker": "^0.2.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^2.3.1",
